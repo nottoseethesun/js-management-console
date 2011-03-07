@@ -1,0 +1,186 @@
+/**
+ * 
+    CSS part of a Management Console that provides a liquid three-column layout 
+    with a center column having a pair of master-detail panes.
+    Works in all modern browsers, and in IE 8 and IE 7.  The aim has been to let the 
+    css and html take care of as much as possible, for fast load time and responsiveness.  
+
+    License: 
+
+    By 'source', below, is meant the html page and the associated css (in the css files linked and 
+    any in-line) and the non-YUI3 JavaScript used for positioning the columns and 
+    master-detail panes of the Management Console.  For further detail on the license, see:
+    http://www.opensource.org/licenses/bsd-license.php
+ 
+    Copyright (c) 2011, Christopher M. Balz
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Neither the name of Christopher M. Balz nor the names of his contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  
+ * 
+ * This document validates as CSS level 3 at http://jigsaw.w3.org/css-validator/validator
+ */
+
+/* Begin Top-level Tag Management */
+
+html.tlswe-mc, body.tlswe-mc {  /* Allow the div's to stretch vertically 100%. */
+    height: 100%;
+}
+
+body.tlswe-mc {  
+    /* 
+       The browsers add a standard margin to the 'body' tag to make 
+       document authoring easier.  But this is an application viewport instead of a document.  
+       So we remove it. 
+    */
+    margin: 0px;
+    /* 
+       Needed as during a JavaScript-driven resize, content momentarily overflows, causing a 
+       scrollbar to appear unless overflow is hidden.
+    */
+    overflow: hidden; 
+
+}
+
+/* End Top-level Tag Management */
+
+
+/* Begin Manage Top-Level Blocks */
+
+
+/*     Begin Main Content Wrapper Positioning */
+/*        This wrapper contains the columns.  */
+.tlswe-mc-main-content {     
+    /* 
+       The absolute positioning of the main content wrapper, as distinguished from the other two 
+       components on the page - header and footer - enables it to peaceably share the viewport
+       with them.  In other words, the absolute position enables us to stretch it as far as
+       possible vertically without overrunning the territory held by the header and footer. 
+     */
+    position: absolute;
+    top: 50px;             
+    bottom: 20px;
+}
+
+/*     End Main Content Wrapper Positioning */
+
+/*     Begin Footer Positioning */
+.tlswe-mc-footer
+{
+    position: absolute;
+    bottom: 0px;
+    height: 20px;  /* We must use pixels here as 'em's don't calculate precisely enough. */
+    width: 100%;
+}
+
+/*     End Footer Positioning */
+
+/* End Manage Top-Level Blocks */
+
+
+
+/* Begin Column Layout Management */
+.tlswe-mc-main-content .tlswe-mc-column {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    /* The direct content of columns is clipped.  Of course, containers inside can scroll and so on. */
+    overflow: hidden;
+}
+
+.tlswe-mc-left {
+    left: 0px;
+    width: 200px;
+    background-color: lemonchiffon; 
+}
+
+.tlswe-mc-center {
+    left: 200px;
+    width: 500px;
+    /* Change the following to a different color for debugging. */
+    background-color: gold;  
+}
+
+.tlswe-mc-right {
+    left: 700px;
+    width: 150px;
+    background-color: mediumaquamarine; 
+}
+
+/*     Begin Column Content Management */
+
+/*         This is the master-detail view on the center column. */
+.tlswe-master-detail {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+}
+
+.tlswe-master-detail.tlswe-master {    
+    height: 350px;
+    background-color: skyblue;
+}
+
+.tlswe-master-detail.tlswe-detail {
+    top: 350px;
+    bottom: 0px;
+    background-color: gold;
+}
+
+/* Step out of the way of the resize border. */
+.tlswe-mc-column.tlswe-mc-left .tlswe-content {    
+    margin-right: 6px; 
+}
+
+/* Step out of the way of the resize border. */
+.tlswe-mc-column.tlswe-mc-right .tlswe-content {    
+    margin-left: 6px; 
+}
+
+
+/*         Begin Resize Borders */
+
+.tlswe-mc-resize-border {
+    position: absolute;
+    top: 0px;
+    background-color: aqua;
+}
+
+.tlswe-mc-left.tlswe-mc-column .tlswe-mc-resize-border {
+    right: 0px;
+    height: 100%;
+    width: 5px;
+}
+
+/* The resize-border for master/detail can be positioned as 'static' - no need for absolute. */
+.tlswe-mc-center.tlswe-mc-column .tlswe-master-detail.tlswe-detail .tlswe-mc-resize-border {
+    position: static;
+    height: 5px;    
+}
+
+.tlswe-mc-right.tlswe-mc-column .tlswe-mc-resize-border {
+    left: 0px;
+    height: 100%;
+    width: 5px;
+} 
+
+/*         End Resize Borders */
+
+/*     End Column Content Management */
+
+/* End Column Layout Management */
+
+
+/* Begin Footer Presentational Styles */
+
+.tlswe-mc-footer-centerable {
+    /* We could use probably table-cell display in the parent element to get perfect centering. */
+    text-align: center; 
+}
+
+/* End Footer Presentational Styles */

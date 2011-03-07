@@ -1,0 +1,9 @@
+Provides a viewport-based user-interface for a data-oriented Web application.  Good for use with single-"Web page" Web applications. The basic skeleton of the user-interface is similar to that used in MS (R) "Outlook" and other applications: a left-hand column, a main center column divided into a master-detail pane arrangement, and a right-hand column.  Reference implementation uses, as a JavaScript engine, YUI3.  However, YUI3 only does the resizing and DOM access, so other frameworks should work with it as well.
+
+Differs significantly from the ExtJs (TM) Viewport in that it aligns closely with html and css, instead of layering its own rendering engine on top of them.  Results in a fast-to-debug, clear, fast-to-load, small-download viewport with a robust level of functionality and extensibility.  
+
+Known Issues
+------------
+a) When resizing the columns such that the center column is at a minimum width, and then moving the visible part of the center column by continuing to drag on the resize handles, the resize-column functionality is lost.
+b) In some unknown circumstances, IE 8 and IE 7 will throw an error upon loading this code.  At other times, it works perfectly.
+

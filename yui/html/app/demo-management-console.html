@@ -1,0 +1,163 @@
+<!DOCTYPE html> 
+<!--
+    Description:
+
+    Minimal-JavaScript-based implementation of a Management Console that provides
+    a liquid three-column layout with a center column having a pair of master-detail panes.
+    Works in all modern browsers, and in IE 8 and IE 7 (reloading sometimes required for 
+    IE 7).  The aim has been to let the css and html take care of as much as possible, 
+    for fast load time and responsiveness.  
+
+    YUI3 was chosen for the JavaScript engine as it is freely available and
+    aligns closely with html and css, observing a good separation of concerns.
+
+    License: 
+
+    By 'source', below, is meant the html page and the associated css (in the css files linked and 
+    any in-line) and the non-YUI3 JavaScript used for positioning the columns and 
+    master-detail panes of the Management Console.  For further detail on the license, see:
+    http://www.opensource.org/licenses/bsd-license.php
+ 
+    Copyright (c) 2011, Christopher M. Balz
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Neither the name of Christopher M. Balz nor the names of his contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  
+ --> 
+ 
+ <!--
+     Notes on the Implementation: 
+
+     A basic floated Management Console would not work with JavaScript-resized 
+     columns.  This probably represents either bugs on the part of browsers, or side effects of the 
+     JavaScript resizing.  Therefore the css for this implementation differs significantly from that
+     used in the pure-css management console.
+  --> 
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" class="tlswe-mc"> 
+ 
+  <head> 
+    <!-- meta http-equiv="content-type" content="text/html; charset=UTF-8"/ -->  
+
+    <!-- 
+         If IE 8 or worse, try Chrome Frame.  For this code, the stable Chrome Frame
+         will work, and Google supplies code for loading that one.
+    --> 
+    <!--[if lte IE 8]>
+      <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <![endif]--> 
+ 
+    <!--[if gt IE 8]>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=10; IE=11" />
+    <![endif]--> 
+     
+    <title>Minimal-JavaScript 3-Column/Master-Detail Mananagement Console (Js Engine is YUI3)</title> 
+    <link rel="stylesheet" type="text/css" href="../../css/tlswe.css" /> 
+    <link rel="stylesheet" type="text/css" href="../../css/widget/management-console.css" /> 
+    <link rel="stylesheet" type="text/css" href="../../css/app/demo-management-console.css" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="../../css/widget/management-console-ie7.css" /> 
+    <![endif]-->  
+  </head> 
+ 
+  <body class="tlswe-mc"> 
+    
+    <!-- Header --> 
+    <div class="tlswe-mc-header"> 
+      <div class="tlswe-mc-identity"><img src="../../images/img_src_placeholder.png" 
+                                        class="tlswe-mc-logo" alt="Your Company Logo"/></div> 
+      <div class="tlswe-mc-authentication">You are currently logged in as jethro <a href="#">logout</a></div> 
+    </div> 
+ 
+    <!-- Main Content --> 
+    <!--    Here begin the three columns --> 
+    <!--    This element is used to share the screen with the 'header' and 'footer' 
+            via absolute positioning.  Otherwise, we can't keep everything in the viewable area. 
+    --> 
+    <div class="tlswe-mc-main-content tlswe-hidden">  
+ 
+      <!-- Left Column -->      
+      <div class="tlswe-mc-left tlswe-mc-column"> 
+        <div class="tlswe-content">
+        left left left left left left left left left left left left
+        left left left left left left left left left left left left
+        left left left left left left left left left left left left
+        left left left left left left left left left left left left
+        </div>
+        <div class="tlswe-mc-resize-border"></div>
+      </div> 
+ 
+      <!-- Center Column -->      
+      <div class="tlswe-mc-center tlswe-mc-column"> 
+        <!-- Master-Detail in the Center Column --> 
+        <div class="tlswe-master-detail tlswe-master"> 
+          <div class="tlswe-content">
+          <p>master master master master master master master master master 
+          master master master master master master master master master 
+          master master master master master master master master master 
+          master master master master master master master master master 
+          </p>
+          <div class="tlswe-demo-a">
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          </div>
+          <div class="tlswe-demo-b">
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  lorem ipsum  
+          </div>
+          </div>
+        </div> 
+        <div class="tlswe-master-detail tlswe-detail"> 
+          <div class="tlswe-mc-resize-border"></div>
+          <div class="tlswe-content tlswe-demo-a">
+          detail detail detail detail detail detail detail detail detail 
+          detail detail detail detail detail detail detail detail detail 
+          detail detail detail detail detail detail detail detail detail 
+          detail detail detail detail detail detail detail detail detail 
+          </div>
+        </div> 
+      </div> 
+ 
+      <!-- Right Column -->      
+      <div class="tlswe-mc-right tlswe-mc-column"> 
+        <div class="tlswe-content">
+        right right right right right right right right right right 
+        right right right right right right right right right right 
+        right right right right right right right right right right 
+        right right right right right right right right right right 
+        </div>
+        <div class="tlswe-mc-resize-border"></div>
+      </div> 
+    </div> 
+ 
+    <!-- Footer --> 
+    <div class="tlswe-mc-footer"> 
+      <div class="tlswe-mc-footer-centerable"> 
+        Copyright 2011 Iron Mountain - All Rights Reserved
+      </div> 
+    </div> 
+
+    <!-- JavaScript Includes -->
+    <!--     JavaScript Engine            -->
+    <!-- script type="text/javascript" src="../../../../../frameworks/yui/build/yui/yui.js" ></script -->
+    <script type="text/javascript" src="/share/js/yui/3/yui/build/yui/yui.js" ></script>
+    <script type="text/javascript" src="../../js/tlswe/lib/util/Namespace.js" ></script>
+    <!--     JavaScript Application Layer -->
+    <script type="text/javascript" src="../../js/tlswe/lib/view/ManagementConsole.js" ></script>
+    <script type="text/javascript" src="../../js/tlswe/lib/controller/DemoManagementConsoleConfig.js" ></script>
+    <script type="text/javascript" src="../../js/tlswe/lib/controller/DemoManagementConsole.js" ></script>
+
+  </body> 
+</html> 
+
